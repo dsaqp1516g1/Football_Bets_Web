@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Panel de Control - Football-Bets</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="Football_API.js"></script>
+  <style>
+
+     /**Set height of the grid so .sidenav can be 100% (adjust as needed)**/
+    .row.content {height: 1000px}
+    
+    /**Set gray background color and 100% height**/
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 1000px
+    }
+        
+    /**On small screens, set height to 'auto' for the grid **/
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;} 
+    }
+    .contenedor_principal { 
+        background: #2d2d30;
+        color: #bdbdbd;
+    }
+    
+    .well { 
+        color: black;
+    }
+    
+    .icono_para_h3 {
+    height: 40px;
+    width: 40px;
+    }
+      
+    .icono_para_h5 {
+    height: 14px;
+    width: 14px;
+    }
+    .icono_sidenav {
+        height: 60px;
+        width: 60px;
+        margin: 0px 10px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse visible-xs">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Football - Bets</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Dashboard</a></li>
+        <li><a href="#">Age</a></li>
+        <li><a href="#">Gender</a></li>
+        <li><a href="#">Geo</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="contenedor_principal">
+    <div class="container-fluid">
+      <div class="row content">
+          
+        <div class="col-sm-3 sidenav hidden-xs">
+          <span align="center"><h1>Football-Bets</h1></span>
+          <ul class="nav nav-pills nav-stacked">
+              
+            <li class="active"><a href="#" data-toggle="tab" align="center">Administrador</a></li>
+              
+            <li onclick="ocultar2row"><a href="#" data-toggle="tab"><img class="icono_sidenav" src="/iconos/football-leader-man.svg">Usuarios</a></li>
+              
+            <li onclick="getEquipos()"><a href="#" data-toggle="tab"><img class="icono_sidenav" src="/iconos/football-team-bench.svg">Equipos</a></li>
+              
+            <li><a href="#"data-toggle="tab"><img class="icono_sidenav" src="/iconos/football-or-soccer-board-with-results-of-games.svg">Liga</a></li>
+              
+            <li><a href="#"data-toggle="tab"><img class="icono_sidenav" src="/iconos/football-player-setting-ball.svg">Jugadores</a></li>
+              
+            <li><a href="#"data-toggle="tab"><img class="icono_sidenav" src="/iconos/football-game-field-top-view.svg">Partidos</a></li>
+              
+            <li><a href="#"data-toggle="tab"><img class="icono_sidenav" src="/iconos/football-signal-of-a-game-announcement-of-one-team-vs-other.svg">Apuestas</a></li>
+              
+          </ul><br>
+        Icons designed by <a href="http://www.freepik.com/">Freepik</a> 
+        </div>
+        <br>
+
+        <div class="col-sm-9">
+          <div class="well" id="info_usuario">
+            <h4>Dashboard</h4>
+            <p>Some text..</p>
+          </div>
+            
+          <div class="row content">
+             <div class="col-sm-12">
+                 <div class="well" id="info_seleccion">
+                 </div>
+             </div>
+          </div>
+            
+        </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
