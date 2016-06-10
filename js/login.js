@@ -6,7 +6,7 @@ $( "#form-signin" ).submit(function( event ) {
       var user = JSON.parse(sessionStorage["auth-token"]);
       console.log(user.userid);
       if (user.userid == "390DA9FF0F0311E69F66001F3BC3E069"){
-          window.location.replace('PanelControl.html');
+          window.location.replace('admin.html');
       }
   	  else{
           window.location.replace('index.html');

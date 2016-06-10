@@ -9,6 +9,12 @@ function getUsuario() {
     console.log(err);
     window.location.replace('signup.html');    
     }
+    if (user.userid == "390DA9FF0F0311E69F66001F3BC3E069"){
+          window.location.replace('admin.html');
+    }
+      else{
+          
+    }
 	console.log(user);
     console.log(user.userid);
     var url = API_BASE_URL + '/usuario/' + user.userid;
