@@ -1,26 +1,18 @@
-var API_BASE_URL = "http://127.0.0.1:8080/football";
-
+//--------------LOGIN-----------------------------------------------------------//
 $( "#form-signin" ).submit(function( event ) {
   event.preventDefault();
   login($("#username").val(), $("#password").val(), function(){
   	console.log("change");
-  	window.location.replace('index.html');
+      var user = JSON.parse(sessionStorage["auth-token"]);
+      console.log(user.userid);
+      if (user.userid == "390DA9FF0F0311E69F66001F3BC3E069"){
+          window.location.replace('PanelControl.html');
+      }
+  	  else{
+          window.location.replace('index.html');
+      }
+          
   });
 });
-
-function login(loginid, password, complete){
-    var uri = API_BASE_URL + '/login';
-		$.post(uri,
-			{
-				loginid: loginid,
-				password: password
-			}).done(function(authToken){
-				sessionStorage["auth-token"] = JSON.stringify(authToken);
-				complete();
-			}).fail(function(jqXHR, textStatus, errorThrown){
-				var error = jqXHR.responseJSON;
-				alert(error.reason);
-			}
-		  );
-}
+//---------------------------------------------------------------------------//
 
