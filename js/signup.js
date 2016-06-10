@@ -14,6 +14,7 @@ function signup(username, password, email, complete) {
     usuario.loginid = username;
     usuario.password = password;
     usuario.email = email;
+    usuario.balance = 0;
     
     var data = $.param(usuario);
     
