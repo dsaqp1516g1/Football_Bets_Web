@@ -3,11 +3,16 @@ $(document).ready(function(){
 });
 //------------------------obtener usuario----------------------------------------//
 function getUsuario() {
+    try{
 	var user = JSON.parse(sessionStorage["auth-token"]);
+    }catch(err){
+    console.log(err);
+    window.location.replace('signup.html');    
+    }
 	console.log(user);
     console.log(user.userid);
     var url = API_BASE_URL + '/usuario/' + user.userid;
-    
+        
     $.ajax({
         url: url,
         type: 'GET',
@@ -40,6 +45,8 @@ function getUsuario() {
         html = html.concat('</table>');
         $("#listado").html(html);
     });
+
+
 }
 //--------------------------------Modificar-Email-Usuario---------------------------------------//
 

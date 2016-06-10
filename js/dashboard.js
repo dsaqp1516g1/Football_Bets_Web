@@ -14,46 +14,38 @@ function getPartidos() {
         
     }).done(function(data, status, jqxhr) {
     	var partidos = data.partidos;
-			
+		var html = '';
+        html = html.concat('<table class="table table-hover">');
+        html = html.concat('<thead>');
+        html = html.concat('<tbody>');
+        html = html.concat('<tr>');
+        html = html.concat('<th>ID</th>');
+        html = html.concat('<th>Local</th>');
+        html = html.concat('<th>Visitante</th>');
+        html = html.concat('<th>Jornada</th>');
+        html = html.concat('<th>Partido</th>');
+        html = html.concat('</tr>');
+        html = html.concat('</thead>');
+
 			$.each(partidos, function(i, v) {
 					var partido = v;
-/*
-                    $('<strong> ID: </strong> ' + partido.id + '<br>').appendTo($('#partidoid'));
-                    $('<strong> Descripción: ' + partido.local + '</strong><br>').appendTo($('#local'));
-                    $('<strong> Summary: </strong> ' + partido.visitante + '<br>').appendTo($('#visitante'));
-                    $('<tr>').appendTo($('#visitante'));
-					*/
-
-		 				var html = '';
-        				html = html.concat('<table class="table table-hover">');
-        				html = html.concat('<thead>');
-        				html = html.concat('<tbody>');
-       				 	html = html.concat('<tr>');
-        				html = html.concat('<th>ID</th>');
-        				html = html.concat('<th>Nombre</th>');
-        				html = html.concat('<th>Email</th>');
-        				html = html.concat('<th>Saldo</th>');
-        				html = html.concat('<th>partido</th>');
-        				html = html.concat('</tr>');
-        				html = html.concat('</thead>');
         				html = html.concat('<tbody>');
         				html = html.concat('<tr>');
         				html = html.concat('<td>' + partido.id + '</td>');
         				html = html.concat('<td>' + partido.local + '</td>');
         				html = html.concat('<td>' + partido.visitante + '</td>');
         				html = html.concat('<td>' + partido.jornada+ '</td>');
-        				html = html.concat('<td>' +'<button class="btn btn-lg btn-primary btn-block" type="submit">Partido</button>'+ '</td>');
-        				html = html.concat('</tr>');
+        				html = html.concat('<td>' +'<a href="partido.html"><button onclick="getPartidoId('+partido.id+')" id="'+partido.id+'" class="btn btn-lg btn-primary btn-block" type="submit">Detalles</button></a>'+ '</td>');
+        				console.log(partido.id);
+                        html = html.concat('</tr>');
         				html = html.concat('</tbody>');
-        				html = html.concat('</table>');
-        				$("#listapartidos").html(html);
-
-
-
+        				$("#form-partidos").html(html);
 				});
+        html = html.concat('</table>');
 				
 	}).fail(function() {
-		$("#listapartidos").text("Error al obtener listas");
+		$("#form-partidos").text("Error al obtener listas");
 	});
    
 }
+//----------------------------------------------------------------------------------------------//
