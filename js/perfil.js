@@ -1,5 +1,6 @@
 $(document).ready(function(){
     getUsuario();
+    getApuestasuser();
 });
 //------------------------obtener usuario----------------------------------------//
 function getUsuario() {
@@ -192,4 +193,58 @@ function eliminarUsuario(){
 				alert(error.reason);
 			}
         );
+}
+//-----------------------------------------------Ver Apuestas Usuario------------------------------------//
+function getApuestasuser() {
+    var user = JSON.parse(sessionStorage["auth-token"]);
+    var url = API_BASE_URL + '/apuesta/usuarioslistados/' + user.userid;
+        
+    $.ajax({
+        url: url,
+        type: 'GET',
+        headers: {
+            "X-Auth-Token": user.token
+        },
+        crossDomain: true,
+        dataType: 'json',
+        
+    }).done(function(data, status, jqxhr) {
+        var apuestas = data.apuestasUsuario;
+        var html = '';
+        html = html.concat('<table class="table table-hover">');
+        html = html.concat('<thead>');
+        html = html.concat('<tbody>');
+        html = html.concat('<tr>');
+        html = html.concat('<th>Resolucion</th>');
+        html = html.concat('<th>Resultado</th>');
+        html = html.concat('<th>Valor</th>');
+        html = html.concat('<th>Balance</th>');
+        html = html.concat('</tr>');
+        html = html.concat('</thead>');
+
+            $.each(apuestas, function(i, v) {
+                    var apuesta = v;
+                        html = html.concat('<tbody>');
+                        html = html.concat('<tr>');
+                        if(apuesta.resolucion != null)
+                        {
+                            html = html.concat('<td>' + apuesta.resolucion + '</td>');
+                        }
+                        else
+                        {
+                            html = html.concat('<td>Apuesta no finalizada</td>');
+                        }
+                        html = html.concat('<td>' + apuesta.resultado + '</td>');
+                        html = html.concat('<td>' + apuesta.valor + '</td>');
+                        html = html.concat('<td>' + apuesta.balance + ''+'€'+'</td>');
+                        html = html.concat('</tr>');
+                        html = html.concat('</tbody>');
+                        $("#apuestasuseinfo").html(html);
+                });
+        html = html.concat('</table>');
+                
+    }).fail(function() {
+        $("#apuestasuseinfo").text("Error al obtener listas");
+    }); 
+
 }

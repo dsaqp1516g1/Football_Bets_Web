@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
     <title>FootballBets</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -21,12 +22,6 @@
 	           <div class="col-md-5">
 	              <div class="row">
 	                <div class="col-lg-12">
-	                  <div class="input-group form">
-	                       <input type="text" class="form-control" placeholder="Search...">
-	                       <span class="input-group-btn">
-	                         <button class="btn btn-primary" type="button">Search</button>
-	                       </span>
-	                  </div>
 	                </div>
 	              </div>
 	           </div>
@@ -69,7 +64,6 @@
 		  				<div class="panel-heading">
 							<div class="panel-title">Datos del Partido</div>						
 							<div class="panel-options">
-								<a href="index.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
 							</div>
 						</div>
 		  				<div class="panel-body" id="infopartido"></div>
@@ -81,14 +75,13 @@
 		  				<div class="panel-heading">
 							<div class="panel-title">Apuesta</div>						
 							<div class="panel-options">
-								<a href="index.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
 							</div>
 						</div>
 		  				<div class="panel-body" id="apuestapartido">
 		  					<form role="form">
 		  					<div class="form-group">
 							  <label for="sel1">Selecciona el resultado:</label>
-							  <select class="form-control" id="sel1">
+							  <select class="form-control" id="resultado">
 							    <option>1</option>
 							    <option>x</option>
 							    <option>2</option>

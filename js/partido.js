@@ -1,3 +1,4 @@
+//-----------------------Ver partido---------------------------------//
 $(document).ready(function(){
     var partidoid = location.search.split('id=')[1]; 
     getPartidoId(partidoid);
@@ -34,4 +35,41 @@ function getPartidoId(id) {
         html = html.concat('</table>');
         $("#infopartido").html(html);;
     });
+}
+//-------------------------------Apostar----------------------------------//
+$("#apostar").click(function(e) {
+    e.preventDefault();
+    var user = JSON.parse(sessionStorage["auth-token"]);
+    var partidoid = location.search.split('id=')[1]; 
+    var newApostar = new Object();
+    newApostar.idusuario = user.userid;
+    newApostar.idapuesta = partidoid;
+    newApostar.resultado= $("#resultado").val();;
+    newApostar.valor = $("#valorapuesta").val();
+    Apostar(newApostar);
+});
+
+
+function Apostar(newApostar) {
+    var user = JSON.parse(sessionStorage["auth-token"]);
+    console.log(user);
+    console.log(user.userid);
+    console.log(user.token)
+    var url = API_BASE_URL + '/apuesta/usuarios/';
+
+    $.ajax({
+        url : url,
+        type : 'POST',
+        crossDomain : true,
+        headers: {
+        "X-Auth-Token":user.token,
+        },
+        contentType: 'application/x-www-form-urlencoded',
+        data : newApostar,
+    }).done(function(partido, status, jqxhr) {
+        $('<div class="alert alert-success"> <strong>Oh!</strong> Partido agregado</div>').appendTo($(""));
+    }).fail(function() {
+        $('<div class="alert alert-danger"> <strong>Oh!</strong> Error al agregar el partido</div>').appendTo($(""));
+    });
+
 }

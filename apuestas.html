@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
     <title>FootballBets</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -52,135 +53,101 @@
                     <!-- Main menu -->
                     <li><a href="admin.html"><i class="glyphicon glyphicon-home"></i>Partidos</a></li>
                     <li class="current"><a href="apuestas.html"><i class="glyphicon glyphicon-euro"></i>Apuestas</a></li>
-                    <li><a href=""><i class="glyphicon glyphicon-user"></i>Campeonato</a></li>
+                    <li><a href="equipos.html"><i class="glyphicon glyphicon-user"></i>Equipos</a></li>
                     <li><a href="index.html"><i class="glyphicon glyphicon-home"></i>FootballBets</a></li>
              </div>
 		  </div>
 		  <div class="col-md-10">
 		  	<div class="row">
-				<div class="col-md-4">
-						  			<div class="content-box-large">
-						  				<div class="panel-heading">
-											<div class="panel-title">Agregar Apuestas</div>						
-											<div class="panel-options">
-												<a href="perfil.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
-											</div>
-										</div>
-						  				<div class="panel-body" id="agregarinfo">
-											<form role="form">
-											<div class="form-group">
-				  							<label for="usr">Local:</label>
-				  							<input type="text" class="form-control" id="local">
-											</div>
-											<div class="form-group">
-				  							<label for="usr">Visitante:</label>
-				  							<input type="text" class="form-control" id="visitante">
-											</div>
-											<div class="form-group">
-											<label for="usr">Jornada:</label>
-				  							<input type="text" class="form-control" id="jornada">
-											</div>
-											<div class="form-group">
-											<label for="usr">Fecha:</label>
-				  							<input type="text" class="form-control" id="fecha" placeholder="YYY-MM-DD">
-											</div>
-											<div class="form-group">
-											<label for="usr">Goles del local:</label>
-				  							<input type="text" class="form-control" id="goleslocal">
-											</div>
-											<div class="form-group">
-											<label for="usr">Goles del visitante:</label>
-				  							<input type="text" class="form-control" id="golesvisitante">
-											</div>
-											<div class="form-group">
-											<label for="estado">Estado:</label>
-											<select class="form-control" id="estado">
-											<option>programado</option>
-											<option>finalizado</option>
-											</select>
-											</div>
-											<div class="form-group">
-											<button type="submit" class="btn btn-success btn-block" id="agregarpartido">Agregar</button>
-											</div>
-											</form>
-						  				</div>
-						  			</div>
-						  		</div>
-
 		  		<div class="col-md-4">
 		  			<div class="content-box-large">
 		  				<div class="panel-heading">
-							<div class="panel-title">Modificar Partido</div>						
+							<div class="panel-title">Agregar Apuesta:</div>						
 							<div class="panel-options">
-								<a href="perfil.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+								<a href="apuestas.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
 							</div>
 						</div>
-		  				<div class="panel-body" id="modificarinfo">
-							<form role="form">
+		  				<div class="panel-body">
+		  				<form role="form">
 							<div class="form-group">
-  							<label for="usr">ID Partido:</label>
-  							<input type="text" class="form-control" id="idpartido">
+  							<label for="usr">ID:</label>
+  							<input type="text" class="form-control" id="idpartidoapuesta">
+							</div>	
+							<div class="form-group">
+							<button type="submit" class="btn btn-success btn-block" id="crearapuesta">Agregar</button>
+							</div>						
+		  				</div>		  				
+		  			</div>
+		  		</div>
+		  		<div class="col-md-4">
+		  			<div class="content-box-large">
+		  				<div class="panel-heading">
+							<div class="panel-title">Finalizar Apuesta:</div>						
+							<div class="panel-options">
+							<a href="apuestas.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
 							</div>
+						</div>
+		  				<div class="panel-body">
+		  				<form role="form">
 							<div class="form-group">
-  							<label for="usr">Local:</label>
-  							<input type="text" class="form-control" id="modlocal">
-							</div>
+  							<label for="usr">ID:</label>
+  							<input type="text" class="form-control" id="idfinalizar">
+							</div>	
 							<div class="form-group">
-  							<label for="usr">Visitante:</label>
-  							<input type="text" class="form-control" id="modvisitante">
-							</div>
-							<div class="form-group">
-							<label for="usr">Jornada:</label>
-  							<input type="text" class="form-control" id="modjornada">
-							</div>
-							<div class="form-group">
-							<label for="usr">Fecha:</label>
-  							<input type="text" class="form-control" id="modfecha" placeholder="YYY-MM-DD">
-							</div>
-							<div class="form-group">
-							<label for="usr">Goles del local:</label>
-  							<input type="text" class="form-control" id="modgoleslocal">
-							</div>
-							<div class="form-group">
-							<label for="usr">Goles del visitante:</label>
-  							<input type="text" class="form-control" id="modgolesvisitante">
-							</div>
-							<div class="form-group">
-							<label for="estado">Estado:</label>
-							<select class="form-control" id="modestado">
-							<option>programado</option>
-							<option>finalizado</option>
+							<label for="sel1">Selecciona el resultado:</label>
+							<select class="form-control" id="ganadora">
+							<option>1</option>
+							<option>x</option>
+							<option>2</option>
 							</select>
 							</div>
 							<div class="form-group">
-							<button type="submit" class="btn btn-warning btn-block" id="modificarpartido">Modificar</button>
-							</div>
-							</form>
-		  				</div>
+							<button type="submit" class="btn btn-primary btn-block" id="finalizarpuesta">Finalizar</button>
+							</div>						
+		  				</div>		  				
 		  			</div>
 		  		</div>
-
-		  		<div class="col-md-4">
+		  			<div class="col-md-4">
 		  			<div class="content-box-large">
 		  				<div class="panel-heading">
-							<div class="panel-title">Eliminar Partido:</div>						
+							<div class="panel-title">Eliminar Apuesta:</div>						
 							<div class="panel-options">
-								<a href="perfil.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+							<a href="apuestas.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
 							</div>
 						</div>
-		  				<div class="panel-body" id="eliminarinfo">
+		  				<div class="panel-body">
 		  				<form role="form">
 							<div class="form-group">
-  							<label for="usr">ID Partido:</label>
+  							<label for="usr">ID:</label>
   							<input type="text" class="form-control" id="ideliminar">
 							</div>	
 							<div class="form-group">
-							<button type="submit" class="btn btn-danger btn-block" id="eliminarpartido">Eliminar</button>
+							<button type="submit" class="btn btn-danger btn-block" id="elimiarapuesta">Eliminar</button>
 							</div>						
+		  				</div>		  				
+		  			</div>
+		  		</div>
+		  </div>
+		  <!--_____________________________tabla ver Apuesta________________-->
+		   	<div class="col-md-12">
+		  	<div class="row">
+		  		<div class="col-md-12">
+		  			<div class="content-box-large">
+		  				<div class="panel-heading">
+							<div class="panel-title">Apuesta:</div>						
+							<div class="panel-options">
+								<a href="apuestas.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+							</div>
+						</div>
+		  				<div class="panel-body" id="listapartidos">
+		  				<fom class="form-apuestaadmin" id="form-apuestaadmin"></fom>
 		  				</div>
 		  			</div>
 		  		</div>
 		  </div>
+		</div>
+
+
  		<!--_____________________________tabla ver partidos________________-->
  			<div class="col-md-12">
 		  	<div class="row">
@@ -189,11 +156,11 @@
 		  				<div class="panel-heading">
 							<div class="panel-title">Partidos</div>						
 							<div class="panel-options">
-								<a href="admin.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+								<a href="apuestas.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
 							</div>
 						</div>
 		  				<div class="panel-body" id="listapartidos">
-		  				<fom class="form-partidosadmin" id="form-partidosadmin"></fom>
+		  				<fom class="form-partidosapuesta" id="form-partidosapuesta"></fom>
 		  				</div>
 		  			</div>
 		  		</div>
@@ -219,6 +186,6 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/API.js"></script>
-    <script src="js/apuestas.js"></script>
+    <script src="js/apuesta.js"></script>
   </body>
 </html>
