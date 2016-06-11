@@ -2,6 +2,15 @@ $(document).ready(function(){
     getPartidos();
 });
 
+function guardarPartidoId(id)
+{
+    console.log(id);
+    var idpar = new Object();
+    idpar.idpartido = id;
+    sessionStorage["idpartido"] = idpar;
+    window.location.replace('partido.html');
+}
+
 //----------------------------Carga-la-lista-de-partidos---------------------------//
 function getPartidos() {
     var url = API_BASE_URL + '/partido/'
@@ -35,8 +44,8 @@ function getPartidos() {
         				html = html.concat('<td>' + partido.local + '</td>');
         				html = html.concat('<td>' + partido.visitante + '</td>');
         				html = html.concat('<td>' + partido.jornada+ '</td>');
-        				html = html.concat('<td>' +'<a href="partido.html"><button onclick="getPartidoId('+partido.id+')" id="'+partido.id+'" class="btn btn-lg btn-primary btn-block" type="submit">Detalles</button></a>'+ '</td>');
-        				console.log(partido.id);
+                        var id = partido.id;
+        				html = html.concat('<td>' +'<a href="partido.html?id='+id+'"><button onclick="" id="'+partido.id+'" class="btn btn-lg btn-primary btn-block" type="submit">Detalles</button></a>'+ '</td>');
                         html = html.concat('</tr>');
         				html = html.concat('</tbody>');
         				$("#form-partidos").html(html);

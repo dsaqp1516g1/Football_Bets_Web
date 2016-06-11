@@ -1,5 +1,6 @@
 $(document).ready(function(){
-    getPartidoId();
+    var partidoid = location.search.split('id=')[1]; 
+    getPartidoId(partidoid);
 
 });
 function getPartidoId(id) {
@@ -16,10 +17,10 @@ function getPartidoId(id) {
         html = html.concat('<thead>');
         html = html.concat('<tbody>');
         html = html.concat('<tr>');
-        html = html.concat('<th>ID</th>');
-        html = html.concat('<th>Nombre</th>');
-        html = html.concat('<th>Email</th>');
-        html = html.concat('<th>Saldo</th>');
+        html = html.concat('<th>Local</th>');
+        html = html.concat('<th>Visitante</th>');
+        html = html.concat('<th>Goles Local</th>');
+        html = html.concat('<th>Goles Visitante</th>');
         html = html.concat('</tr>');
         html = html.concat('</thead>');
         html = html.concat('<tbody>');
