@@ -46,7 +46,7 @@ function getUsuario() {
         html = html.concat('<td>' + data.id + '</td>');
         html = html.concat('<td>' + data.loginid + '</td>');
         html = html.concat('<td>' + data.email + '</td>');
-        html = html.concat('<td>' + data.balance + '</td>');
+        html = html.concat('<td>' + data.balance + '€'+'</td>');
         html = html.concat('</tr>');
         html = html.concat('</tbody>');
         html = html.concat('</table>');
@@ -55,15 +55,35 @@ function getUsuario() {
 
 
 }
+function getUsuarioparaMods(user) {
+    
+
+
+}
 //--------------------------------Modificar-Email-Usuario---------------------------------------//
 
 $("#modificaremail").click(function(e) {
 	e.preventDefault();
-	var user = JSON.parse(sessionStorage["auth-token"]);    
-    var usuarioMod = new Object();
-    usuarioMod.id= user.userid;
-    usuarioMod.email = $("#email").val();    
-	putUsuarioEmail(usuarioMod);
+	var user = JSON.parse(sessionStorage["auth-token"]);   
+    var url = API_BASE_URL + '/usuario/' + user.userid;
+        
+    $.ajax({
+        url: url,
+        type: 'GET',
+        headers: {
+            "X-Auth-Token": user.token
+        },
+        crossDomain: true,
+        dataType: 'json',
+        
+    }).done(function(data, status, jqxhr) {
+
+        var usuarioMod = new Object();
+        usuarioMod.id= data.id;
+        usuarioMod.email = $("#email").val();
+        usuarioMod.balance = data.balance;
+        putUsuarioEmail(usuarioMod);
+    });
 });
 
 function putUsuarioEmail(usuarioMod) {
@@ -99,7 +119,7 @@ function putUsuarioEmail(usuarioMod) {
         html = html.concat('<td>' + datamod.id + '</td>');
         html = html.concat('<td>' + datamod.loginid + '</td>');
         html = html.concat('<td>' + datamod.email + '</td>');
-        html = html.concat('<td>' + datamod.balance + '</td>');
+        html = html.concat('<td>' + datamod.balance + '€'+'</td>');
         html = html.concat('</tr>');
         html = html.concat('</tbody>');
         html = html.concat('</table>');
@@ -114,11 +134,27 @@ function putUsuarioEmail(usuarioMod) {
 //------------------------------Agregar-Saldo---------------------------------------------//
 $("#agregardinero").click(function(e) {
 	e.preventDefault();
-	var user = JSON.parse(sessionStorage["auth-token"]);    
-    var usuarioMod = new Object();
-    usuarioMod.id= user.userid;
-    usuarioMod.balance = $("#balance").val();     
-	putUsuarioSaldo(usuarioMod);
+	var user = JSON.parse(sessionStorage["auth-token"]);
+    var url = API_BASE_URL + '/usuario/' + user.userid;    
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        headers: {
+            "X-Auth-Token": user.token
+        },
+        crossDomain: true,
+        dataType: 'json',
+        
+    }).done(function(data, status, jqxhr) {
+
+        var usuarioMod = new Object();
+        usuarioMod.id= data.id;
+        usuarioMod.email = data.email;
+        var nuevobalance = (parseInt($("#balance").val()) + parseInt(data.balance));
+        usuarioMod.balance = nuevobalance;
+        putUsuarioSaldo(usuarioMod);
+    });
 });
 
 function putUsuarioSaldo(usuarioMod) {
@@ -154,7 +190,7 @@ function putUsuarioSaldo(usuarioMod) {
         html = html.concat('<td>' + data.id + '</td>');
         html = html.concat('<td>' + data.loginid + '</td>');
         html = html.concat('<td>' + data.email + '</td>');
-        html = html.concat('<td>' + data.balance + '</td>');
+        html = html.concat('<td>' + data.balance + '€'+ '</td>');
         html = html.concat('</tr>');
         html = html.concat('</tbody>');
         html = html.concat('</table>');
@@ -232,7 +268,7 @@ function getApuestasuser() {
                         }
                         else
                         {
-                            html = html.concat('<td>Apuesta no finalizada</td>');
+                            html = html.concat('<td>apuesta no finalizada</td>');
                         }
                         html = html.concat('<td>' + apuesta.resultado + '</td>');
                         html = html.concat('<td>' + apuesta.valor + '</td>');
