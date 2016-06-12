@@ -1,7 +1,12 @@
+$(document).ready(function(){
+    getEquiposGuardados();
+});
+
 //----------------------Mostrar equipos--------------------------------------------------------------//
 $("#obenerequipos").click(function(e) {
     e.preventDefault();
     getEquipos();
+
 });
 
 var listadoIDLigas = new Object();
@@ -94,7 +99,7 @@ function getEquipos() {
                         html = html.concat('<td>' + equipo.squadMarketValue + '</td>');
                         var uri = equipo._links.self.href;
                         var id = uri.slice(38,44);
-                        html = html.concat('<td>' +'<button  onclick="autoCompletar('+id+');" class="btn btn-sm btn-primary btn-block" type="submit">Usar</button>'+'</td>');
+                        html = html.concat('<td>' +'<button  onclick="autoCompletar('+id+');" class="btn btn-sm btn-success btn-block" type="submit">Usar</button>'+'</td>');
                         html = html.concat('</tr>');
                         html = html.concat('</tbody>');
                         $("#form-equipos").html(html);
@@ -142,4 +147,79 @@ function crearEquipo(newEquipo) {
         $('<div class="alert alert-danger"> <strong>Oh!</strong> Error al agregar el partido</div>').appendTo($(""));
     });
 
+}
+
+//---------------------------------------------Eliminar equipo-----------------------------------------------------//
+function eliminarId(ideliminar){
+
+    $("#equipoelim").val(ideliminar);
+}
+
+$("#eliminarequipo").click(function(e) {
+    e.preventDefault();
+    var deleteEquipo = new Object();
+    deleteEquipo.id = $("#equipoelim").val();
+
+    eliminarEquipo(deleteEquipo);
+});
+
+function eliminarEquipo(deleteEquipo){
+    var user = JSON.parse(sessionStorage["auth-token"]);
+    var uri = API_BASE_URL + '/equipo/' + deleteEquipo.id;
+    
+    $.ajax({
+            type: 'DELETE',
+            url: uri,
+            headers: {
+            "X-Auth-Token":user.token
+            }
+        
+            }).done(function(data){
+                console.log(data);
+                getEquiposGuardados();
+
+            }).fail(function(jqXHR, textStatus, errorThrown){
+                var error = jqXHR.responseJSON;
+                alert(error.reason);
+            }
+        );
+}
+
+//-------------------------------------------------Equipos Guardados Mostrar---------------------------------------------------//
+function getEquiposGuardados() {
+    var url = API_BASE_URL + '/equipo/'
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'json',
+        
+    }).done(function(data, status, jqxhr) {
+        var equipos = data.equipos;
+        var html = '';
+        html = html.concat('<table class="table table-hover">');
+        html = html.concat('<thead>');
+        html = html.concat('<tbody>');
+        html = html.concat('<tr>');;
+        html = html.concat('<th>Nomenclatura</th>');
+        html = html.concat('<th>Seleccionar</th>');;
+        html = html.concat('</tr>');
+        html = html.concat('</thead>');
+
+            $.each(equipos, function(i, v) {
+                    var equipo = v;
+                        html = html.concat('<tbody>');
+                        html = html.concat('<tr>');
+                        html = html.concat('<td>' + equipo.nomenclatura+ '</td>');
+                        html = html.concat('<td>' +'<button  onclick="eliminarId(\''+equipo.id+'\')" class="btn btn-sm btn-danger btn-block" type="submit">Eliminar</button>'+'</td>');
+                        html = html.concat('</tbody>');
+                        $("#form-equiposguardados").html(html);
+                });
+        html = html.concat('</table>');
+                
+    }).fail(function() {
+        $("#form-equiposguardados").text("Error al obtener listas");
+    });
+   
 }

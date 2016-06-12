@@ -1,6 +1,7 @@
 //-------------Get Partidos-----------------------------------------------//
 $(document).ready(function(){
     getListaPartidos();
+    getEquipos();
 });
 //----------------------------Carga-el-listado-de-equipos---------------------------//
 function getListaPartidos() {
@@ -73,7 +74,7 @@ function getPartidos() {
                         html = html.concat('<td>' + partido.goleslocal+ '</td>');
                         html = html.concat('<td>' + partido.golesvisitante+ '</td>');
                         var id = partido.id;
-                        html = html.concat('<td>' +'<button  onclick="agregarinfo(\''+partido.local+'\',\''+partido.visitante+'\')" class="btn btn-sm btn-primary btn-block" type="submit">Usar</button>'+'</td>');
+                        html = html.concat('<td>' +'<button  onclick="agregarinfo(\''+partido.id+'\'+\''+partido.local+'\',\''+partido.visitante+'\')" class="btn btn-sm btn-primary btn-block" type="submit">Usar</button>'+'</td>');
                         html = html.concat('</tr>');
                         html = html.concat('</tbody>');
                         $("#form-partidosadmin").html(html);
@@ -197,4 +198,56 @@ function agregarinfo(local,visitante){
 
     $("#local").val(local);
     $("#visitante").val(visitante);
+}
+function agregarLocal(local){
+
+    $("#local").val(local);
+   
+}
+function agregarVisitante(visitante){
+
+    $("#visitante").val(visitante);
+   
+}
+//--------------------------------------------get equipos------------------------------------------------//
+function getEquipos() {
+    var url = API_BASE_URL + '/equipo/'
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'json',
+        
+    }).done(function(data, status, jqxhr) {
+        var equipos = data.equipos;
+        var html = '';
+        html = html.concat('<table class="table table-hover">');
+        html = html.concat('<thead>');
+        html = html.concat('<tbody>');
+        html = html.concat('<tr>');
+        html = html.concat('<th>Nombre</th>');
+        html = html.concat('<th>Nomenclatura</th>');
+        html = html.concat('<th>Local</th>');
+        html = html.concat('<th>Visitante</th>');
+        html = html.concat('</tr>');
+        html = html.concat('</thead>');
+
+            $.each(equipos, function(i, v) {
+                    var equipo = v;
+                        html = html.concat('<tbody>');
+                        html = html.concat('<tr>');
+                        html = html.concat('<td>' + equipo.nombre + '</td>');
+                        html = html.concat('<td>' + equipo.nomenclatura+ '</td>');
+                        html = html.concat('<td>' +'<button  onclick="agregarLocal(\''+equipo.id+'\')" class="btn btn-sm btn-primary btn-block" type="submit">Local</button>'+'</td>');
+                        html = html.concat('<td>' +'<button  onclick="agregarVisitante(\''+equipo.id+'\')" class="btn btn-sm btn-primary btn-block" type="submit">Visitante</button>'+'</td>');
+                        html = html.concat('</tbody>');
+                        $("#form-equiposadmin").html(html);
+                });
+        html = html.concat('</table>');
+                
+    }).fail(function() {
+        $("#form-equiposadmin").text("Error al obtener listas");
+    });
+   
 }
