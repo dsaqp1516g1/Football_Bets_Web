@@ -152,8 +152,12 @@ $("#agregardinero").click(function(e) {
         usuarioMod.id= data.id;
         usuarioMod.email = data.email;
         var nuevobalance = (parseInt($("#balance").val()) + parseInt(data.balance));
-        usuarioMod.balance = nuevobalance;
-        putUsuarioSaldo(usuarioMod);
+        if(!isNaN(nuevobalance))
+        {
+            usuarioMod.balance = nuevobalance;
+            putUsuarioSaldo(usuarioMod);
+        }
+        
     });
 });
 
@@ -252,7 +256,7 @@ function getApuestasuser() {
         html = html.concat('<tbody>');
         html = html.concat('<tr>');
         html = html.concat('<th>Resolucion</th>');
-        html = html.concat('<th>Resultado</th>');
+        html = html.concat('<th>Apostado</th>');
         html = html.concat('<th>Valor</th>');
         html = html.concat('<th>Balance</th>');
         html = html.concat('</tr>');
@@ -271,7 +275,7 @@ function getApuestasuser() {
                             html = html.concat('<td>apuesta no finalizada</td>');
                         }
                         html = html.concat('<td>' + apuesta.resultado + '</td>');
-                        html = html.concat('<td>' + apuesta.valor + '</td>');
+                        html = html.concat('<td>' + apuesta.valor + ''+'€'+'</td>');
                         html = html.concat('<td>' + apuesta.balance + ''+'€'+'</td>');
                         html = html.concat('</tr>');
                         html = html.concat('</tbody>');
