@@ -115,10 +115,12 @@ function crearPartido(newPartido) {
     	contentType: 'application/x-www-form-urlencoded',
 		data : newPartido,
 	}).done(function(partido, status, jqxhr) {
-        $('<div class="alert alert-success"> <strong>Oh!</strong> Partido agregado</div>').appendTo($("#agregarinfo"));
+        $('#erroragregar').text(' ')
+        $('<div class="alert alert-success">Partido agregado</div>').appendTo($("#erroragregar"));
         getPartidos();
   	}).fail(function() {
-		$('<div class="alert alert-danger"> <strong>Oh!</strong> Error al agregar el partido</div>').appendTo($("#agregarinfo"));
+        $('#erroragregar').text(' ')
+		$('<div class="alert alert-danger"> <strong>Oh!</strong>Error al agregar el partido</div>').appendTo($("#erroragregar"));
 	});
 
 }

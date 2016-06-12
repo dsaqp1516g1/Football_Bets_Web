@@ -141,10 +141,23 @@ function crearEquipo(newEquipo) {
         },
         contentType: 'application/x-www-form-urlencoded',
         data : newEquipo,
+        statusCode:
+        {
+        409: function()
+            {   $('#erroresagregar').text(' ');
+                $('<div class="alert alert-danger">Error en los campos</div>').appendTo($("#errorguardar"));
+            },
+        400: function()
+            {   $('#errorguardar').text(' ');
+                $('<div class="alert alert-danger">Error en los campos</div>').appendTo($("#errorguardar"));
+            }
+        }
     }).done(function(equipo, status, jqxhr) {
-        $('<div class="alert alert-success"> <strong>Oh!</strong> Equipo agregado</div>').appendTo($(""));
+        $('#errorguardar').text(' ');
+        $('<div class="alert alert-success"> <strong>Oh!</strong> Equipo agregado</div>').appendTo($("#errorguardar"));
+        getEquiposGuardados();
     }).fail(function() {
-        $('<div class="alert alert-danger"> <strong>Oh!</strong> Error al agregar el partido</div>').appendTo($(""));
+        
     });
 
 }
@@ -153,27 +166,30 @@ function crearEquipo(newEquipo) {
 function eliminarId(ideliminar){
 
     $("#equipoelim").val(ideliminar);
+    eliminarEquipo(ideliminar);
 }
-
-$("#eliminarequipo").click(function(e) {
-    e.preventDefault();
-    var deleteEquipo = new Object();
-    deleteEquipo.id = $("#equipoelim").val();
-
-    eliminarEquipo(deleteEquipo);
-});
 
 function eliminarEquipo(deleteEquipo){
     var user = JSON.parse(sessionStorage["auth-token"]);
-    var uri = API_BASE_URL + '/equipo/' + deleteEquipo.id;
+    var uri = API_BASE_URL + '/equipo/' + deleteEquipo;
     
     $.ajax({
             type: 'DELETE',
             url: uri,
             headers: {
             "X-Auth-Token":user.token
+            },
+        statusCode:
+        {
+        409: function()
+            {   $('#erroreliminar').text(' ');
+                $('<div class="alert alert-danger">Error en los campos</div>').appendTo($("#erroreliminar"));
+            },
+        400: function()
+            {   $('#erroreliminar').text(' ');
+                $('<div class="alert alert-danger">Error en los campos</div>').appendTo($("#erroreliminar"));
             }
-        
+        }   
             }).done(function(data){
                 console.log(data);
                 getEquiposGuardados();

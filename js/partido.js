@@ -2,6 +2,7 @@
 $(document).ready(function(){
     var partidoid = location.search.split('id=')[1]; 
     getListaPartidos(partidoid);
+    getApuesta(partidoid);
 
 });
 
@@ -123,6 +124,7 @@ function Apostar(newApostar) {
         data : newApostar,
     }).done(function(partido, status, jqxhr) {
         $('<div class="alert alert-success"> <strong>Oh!</strong> Partido agregado</div>').appendTo($(""));
+        getApuesta(partido.apuestaid);
     }).fail(function() {
         $('<div class="alert alert-danger"> <strong>Oh!</strong> Error al agregar el partido</div>').appendTo($(""));
     });
@@ -164,4 +166,40 @@ function getApuestaByID(id) {
     }).fail(function() {
         $("#form-apuestaadmin").text("Error al obtener listas");
     });   
+}
+
+//---------------------------------------GET APUESTA--------------------------------------------//
+function getApuesta(apuestaid) {
+    var url = API_BASE_URL + '/apuesta/' + apuestaid;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'json',
+    }).done(function(data, status, jqxhr) {
+        var apuesta = data;
+        var html = '';
+        html = html.concat('<table class="table table-hover">');
+        html = html.concat('<thead>');
+        html = html.concat('<tbody>');
+        html = html.concat('<tr>');
+        html = html.concat('<th>Cuota 1</th>');
+        html = html.concat('<th>Cuota X</th>');
+        html = html.concat('<th>Cuota 2</th>');
+        html = html.concat('</tr>');
+        html = html.concat('</thead>')
+        html = html.concat('<tbody>');
+        html = html.concat('<tr>');
+        html = html.concat('<td>' + apuesta.cuota1+ '</td>');
+        html = html.concat('<td>' + apuesta.cuotax + '</td>');
+        html = html.concat('<td>' + apuesta.cuota2 + '</td>');
+        html = html.concat('</tr>');
+        html = html.concat('</tbody>');
+        $("#form-apuesta").html(html);
+                
+        html = html.concat('</table>');
+                
+    }).fail(function() {
+        $("#form-apuesta").text("Error al obtener apuesta");
+    });
 }
