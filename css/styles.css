@@ -13,6 +13,12 @@ body {
   margin-top: 30px;
 }
 
+.icono {
+  height: 100px;
+  padding: 15px; /* firefox bug fix */
+  width: auto;
+}
+
 /* Footer */
 
 footer{

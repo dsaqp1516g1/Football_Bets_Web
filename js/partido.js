@@ -1,9 +1,45 @@
 //-----------------------Ver partido---------------------------------//
 $(document).ready(function(){
     var partidoid = location.search.split('id=')[1]; 
-    getPartidoId(partidoid);
+    getListaPartidos(partidoid);
 
 });
+
+var listadoEquipos = new Object();
+//----------------------------Resolución---de----Nombres---------------------------//
+function getResolucionNombreEquipo(id)
+{
+    var nombre = null;
+    $.each(listadoEquipos, function(i, equipo) 
+    {
+        if (id.localeCompare(equipo.id) == 0)
+        {
+            nombre = equipo.nombre;
+        }
+    });
+
+    return nombre;
+}
+//----------------------------Carga-el-listado-de-equipos---------------------------//
+function getListaPartidos(id) {
+    var url = API_BASE_URL + '/equipo/'
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'json',
+        
+    }).done(function(data, status, jqxhr) {
+        listadoEquipos = data.equipos;
+        getPartidoId(id);
+    }).fail(function() {
+        $("#form-partidos").text("Error al obtener listas");
+    });
+   
+}
+
+//----------------------------Carga-el-partido--------------------------------------//
 function getPartidoId(id) {
     var url = API_BASE_URL + '/partido/' + id;
     $.ajax({
@@ -22,18 +58,26 @@ function getPartidoId(id) {
         html = html.concat('<th>Visitante</th>');
         html = html.concat('<th>Goles Local</th>');
         html = html.concat('<th>Goles Visitante</th>');
+        html = html.concat('<th>Fecha</th>');
+        html = html.concat('<th>Estado</th>');
         html = html.concat('</tr>');
         html = html.concat('</thead>');
         html = html.concat('<tbody>');
         html = html.concat('<tr>');
-        html = html.concat('<td>' + partido.local + '</td>');
-        html = html.concat('<td>' + partido.visitante + '</td>');
+        html = html.concat('<td>' + getResolucionNombreEquipo(partido.local) + '</td>');
+        html = html.concat('<td>' + getResolucionNombreEquipo(partido.visitante) + '</td>');
         html = html.concat('<td>' + partido.goleslocal + '</td>');
         html = html.concat('<td>' + partido.golesvisitante + '</td>');
+        html = html.concat('<td>' + partido.fecha + '</td>');
+        html = html.concat('<td>' + partido.estado + '</td>');
         html = html.concat('</tr>');
         html = html.concat('</tbody>');
         html = html.concat('</table>');
-        $("#infopartido").html(html);;
+        $("#infopartido").html(html);
+
+        var html = '';
+        html = html.concat('<h1>'+getResolucionNombreEquipo(partido.local)+' '+ partido.goleslocal+'  -  '+partido.golesvisitante+' '+ getResolucionNombreEquipo(partido.visitante)+'</h1>');
+        $("#infomarcador").html(html);
     });
 }
 //-------------------------------Apostar----------------------------------//
@@ -44,8 +88,8 @@ $("#apostar").click(function(e) {
     var newApostar = new Object();
     newApostar.idusuario = user.userid;
     newApostar.idapuesta = partidoid;
-    newApostar.resultado= $("#resultado").val();;
-    newApostar.valor = $("#valorapuesta").val();
+    newApostar.resultado = $("#resultado").val();
+    newApostar.valor = parseInt($("#valorapuesta").val());
     Apostar(newApostar);
 });
 
