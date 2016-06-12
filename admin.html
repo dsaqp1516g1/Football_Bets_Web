@@ -67,7 +67,7 @@
 				<div class="col-md-4">
 						  			<div class="content-box-large">
 						  				<div class="panel-heading">
-											<div class="panel-title">Agregar Partido:</div>						
+											<div class="panel-title"><img src="iconos/football-ball-variant-1.svg" class="iconom">Agregar Partido:</div>						
 											<div class="panel-options">
 												<a href="perfil.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
 											</div>
@@ -124,7 +124,7 @@
 		  		<div class="col-md-4">
 		  			<div class="content-box-large">
 		  				<div class="panel-heading">
-							<div class="panel-title">Modificar Partido:</div>						
+							<div class="panel-title"><img src="iconos/football-list-with-up-and-down-arrows.svg" class="iconom">Modificar Partido:</div>						
 							<div class="panel-options">
 								<a href="perfil.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
 							</div>
@@ -143,10 +143,33 @@
   							<label for="usr">Visitante:</label>
   							<input type="text" class="form-control" id="modvisitante">
 							</div>
-							<div class="form-group">
 							<label for="usr">Fecha:</label>
-  							<input type="text" class="form-control" id="modfecha" placeholder="YYY-MM-DD">
+							<div id="datetimepickermodfecha" class="input-append date">		     
+							<input type="text" class="form-control" data-format="yyyy-MM-dd" id="modfecha"></input>
+							<span class="add-on">
+							<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+							</span>
 							</div>
+							<script type="text/javascript"
+						     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+						    </script> 
+						    <script type="text/javascript"
+						     src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+						    </script>
+						    <script type="text/javascript"
+						     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+						    </script>
+						    <script type="text/javascript"
+						     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+						    </script>
+						    <script type="text/javascript">
+						      $('#datetimepickermodfecha').datetimepicker({
+						        format: 'yyyy-MM-dd',
+						        language: 'pt-ES'
+						      });
+						    </script>
+							
+
 							<div class="form-group">
 							<label for="usr">Goles del local:</label>
   							<input type="text" class="form-control" id="modgoleslocal">
@@ -173,7 +196,7 @@
 		  		<div class="col-md-4">
 		  			<div class="content-box-large">
 		  				<div class="panel-heading">
-							<div class="panel-title">Eliminar Partido:</div>						
+							<div class="panel-title"><img src="iconos/football-card-with-cross-mark.svg" class="iconom">Eliminar Partido:</div>						
 							<div class="panel-options">
 								<a href="perfil.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
 							</div>

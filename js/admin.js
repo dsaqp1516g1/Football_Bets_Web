@@ -74,7 +74,7 @@ function getPartidos() {
                         html = html.concat('<td>' + partido.goleslocal+ '</td>');
                         html = html.concat('<td>' + partido.golesvisitante+ '</td>');
                         var id = partido.id;
-                        html = html.concat('<td>' +'<button  onclick="agregarinfo(\''+partido.id+'\'+\''+partido.local+'\',\''+partido.visitante+'\')" class="btn btn-sm btn-primary btn-block" type="submit">Usar</button>'+'</td>');
+                        html = html.concat('<td>' +'<button  onclick="agregarinfo(\''+partido.id+'\',\''+partido.local+'\',\''+partido.visitante+'\',\''+partido.fecha+'\',\''+partido.goleslocal+'\',\''+partido.golesvisitante+'\')" class="btn btn-sm btn-primary btn-block" type="submit">Usar</button>'+'</td>');
                         html = html.concat('</tr>');
                         html = html.concat('</tbody>');
                         $("#form-partidosadmin").html(html);
@@ -194,10 +194,19 @@ function eliminarPartido(deletePartido){
 }
 
 //----------------------------------------------------Agregar a cuadros-----------------------------------//
-function agregarinfo(local,visitante){
+function agregarinfo(id, local, visitante, fecha, goleslocal, golesvisitante){
 
     $("#local").val(local);
     $("#visitante").val(visitante);
+
+    $("#idpartido").val(id);
+    $("#modlocal").val(local);
+    $("#modvisitante").val(visitante);
+    $("#modfecha").val(fecha);
+    $("#modgoleslocal").val(goleslocal);
+    $("#modgolesvisitante").val(golesvisitante);
+
+    $("#ideliminar").val(id);
 }
 function agregarLocal(local){
 
