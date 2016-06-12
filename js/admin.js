@@ -92,7 +92,7 @@ $("#agregarpartido").click(function(e) {
 	newPartido.local = $("#local").val();
 	newPartido.visitante = $("#visitante").val();
  	newPartido.jornada = 1;
- 	newPartido.fecha = $("#fecha").val();
+ 	newPartido.fecha = $("#fechaauto").val();
 	newPartido.goleslocal = 0;
 	newPartido.golesvisitante = 0;
 	newPartido.estado = 'programado';
@@ -129,7 +129,7 @@ $("#modificarpartido").click(function(e) {
     modPartido.id = $("#idpartido").val();
 	modPartido.local = $("#modlocal").val();
 	modPartido.visitante = $("#modvisitante").val();
- 	modPartido.jornada = $("#modjornada").val();
+ 	modPartido.jornada = 1;
  	modPartido.fecha = $("#modfecha").val();
 	modPartido.goleslocal = $("#modgoleslocal").val();
 	modPartido.golesvisitante = $("#modgolesvisitante").val();

@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 //----------------------------Carga-la-lista-de-partidos---------------------------//
 function getEstadisticas() {
-    var url = API_BASE_URL + '/partido/'
+    var url = API_BASE_URL + '/equipo/'
 
     $.ajax({
         url: url,
@@ -13,34 +13,32 @@ function getEstadisticas() {
         dataType: 'json',
         
     }).done(function(data, status, jqxhr) {
-    	var partidos = data.partidos;
+    	var equipos = data.equipos;
 		var html = '';
         html = html.concat('<table class="table table-hover">');
         html = html.concat('<thead>');
         html = html.concat('<tbody>');
         html = html.concat('<tr>');
-        html = html.concat('<th>ID</th>');
-        html = html.concat('<th>Local</th>');
-        html = html.concat('<th>Visitante</th>');
-        html = html.concat('<th>Jornada</th>');
+        html = html.concat('<th>Nombre</th>');
+        html = html.concat('<th>Nomenclatura</th>');
+        html = html.concat('<th>Valor</th>');
         html = html.concat('</tr>');
         html = html.concat('</thead>');
 
-			$.each(partidos, function(i, v) {
-					var partido = v;
+			$.each(equipos, function(i, v) {
+					var equipo = v;
         				html = html.concat('<tbody>');
         				html = html.concat('<tr>');
-        				html = html.concat('<td>' + partido.id + '</td>');
-        				html = html.concat('<td>' + partido.local + '</td>');
-        				html = html.concat('<td>' + partido.visitante + '</td>');
-        				html = html.concat('<td>' + partido.jornada+ '</td>');
+        				html = html.concat('<td>' + equipo.nombre + '</td>');
+        				html = html.concat('<td>' + equipo.nomenclatura+ '</td>');
+        				html = html.concat('<td>' + equipo.valor + ' ' + '€' + '</td>');
         				html = html.concat('</tbody>');
-        				$("#listacampeonato").html(html);
+        				$("#listaequipos").html(html);
 				});
         html = html.concat('</table>');
 				
 	}).fail(function() {
-		$("#listacampeonato").text("Error al obtener listas");
+		$("#listaequipos").text("Error al obtener listas");
 	});
    
 }
