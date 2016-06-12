@@ -145,7 +145,7 @@ function crearEquipo(newEquipo) {
         {
         409: function()
             {   $('#erroresagregar').text(' ');
-                $('<div class="alert alert-danger">Error en los campos</div>').appendTo($("#errorguardar"));
+                $('<div class="alert alert-danger">El equipo ya exsiste</div>').appendTo($("#errorguardar"));
             },
         400: function()
             {   $('#errorguardar').text(' ');
@@ -154,7 +154,7 @@ function crearEquipo(newEquipo) {
         }
     }).done(function(equipo, status, jqxhr) {
         $('#errorguardar').text(' ');
-        $('<div class="alert alert-success"> <strong>Oh!</strong> Equipo agregado</div>').appendTo($("#errorguardar"));
+        $('<div class="alert alert-success">Equipo agregado</div>').appendTo($("#errorguardar"));
         getEquiposGuardados();
     }).fail(function() {
         

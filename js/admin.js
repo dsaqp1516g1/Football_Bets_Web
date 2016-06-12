@@ -120,7 +120,7 @@ function crearPartido(newPartido) {
         getPartidos();
   	}).fail(function() {
         $('#erroragregar').text(' ')
-		$('<div class="alert alert-danger"> <strong>Oh!</strong>Error al agregar el partido</div>').appendTo($("#erroragregar"));
+		$('<div class="alert alert-danger">Error al agregar el partido</div>').appendTo($("#erroragregar"));
 	});
 
 }
@@ -158,11 +158,13 @@ function putPartido(modPartido) {
     	},
     	dataType : 'json',
 		data : datamod,
-	}).done(function(partido, status, jqxhr) {				
-		$('<div class="alert alert-success"> <strong>Oh!</strong> Partido Modificado</div>').appendTo($("#modificarinfo"));
+	}).done(function(partido, status, jqxhr) {
+        $('#erromod').text(' ')				
+		$('<div class="alert alert-success">Partido Modificado</div>').appendTo($("#erromod"));
         getPartidos();
   	}).fail(function() {
-		$('<div class="alert alert-danger"> <strong>Oh!</strong> Error al modificar el partido</div>').appendTo($("#modificarinfo"));
+        $('#erromod').text(' ')
+		$('<div class="alert alert-danger">Error datos incorrectos</div>').appendTo($("#erromod"));
 	});
   }
 
@@ -188,9 +190,11 @@ function eliminarPartido(deletePartido){
             }).done(function(data){
                 console.log(data);
                 getPartidos();
-                $('<div class="alert alert-success"> <strong>Oh!</strong> Partido Eliminado</div>').appendTo($("#eliminarinfo"));
+                $('#erroreliminar').text(' ')             
+                $('<div class="alert alert-success">Partido Eliminado</div>').appendTo($("#erroreliminar"));
             }).fail(function(){
-                $('<div class="alert alert-success"> <strong>Oh!</strong>Error partido no eliminado</div>').appendTo($("#eliminarinfo"));
+                $('#erroreliminar').text(' ') 
+                $('<div class="alert alert-danger">Error partido no eliminado</div>').appendTo($("#erroreliminar"));
             }
         );
 }
