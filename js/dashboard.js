@@ -71,7 +71,7 @@ function getPartidos() {
         html = html.concat('<th>Estado</th>');
         html = html.concat('<th>G.Local</th>');
         html = html.concat('<th>G.Visitante</th>');
-        html = html.concat('<th>Partido</th>');
+        html = html.concat('<th>Apuestas</th>');
         html = html.concat('</tr>');
         html = html.concat('</thead>');
 

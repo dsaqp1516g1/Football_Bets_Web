@@ -6,6 +6,7 @@ $(document).ready(function(){
 });
 
 var listadoEquipos = new Object();
+var apuestaActivada = false;
 //----------------------------Resolución---de----Nombres---------------------------//
 function getResolucionNombreEquipo(id)
 {
@@ -32,7 +33,8 @@ function getListaPartidos(id) {
         
     }).done(function(data, status, jqxhr) {
         listadoEquipos = data.equipos;
-        getPartidoId(id);
+        getApuestaByID(id);
+        
     }).fail(function() {
         $("#form-partidos").text("Error al obtener listas");
     });
@@ -78,6 +80,15 @@ function getPartidoId(id) {
         var html = '';
         html = html.concat('<h1>'+getResolucionNombreEquipo(partido.local)+' '+ partido.goleslocal+'  -  '+partido.golesvisitante+' '+ getResolucionNombreEquipo(partido.visitante)+'</h1>');
         $("#infomarcador").html(html);
+
+        
+        console.log(apuestaActivada);
+        if (apuestaActivada == false)
+        {
+            var html = '';
+            html = html.concat('Apuesta finalizada');
+            $("#idcaja").html(html);
+        }
     });
 }
 //-------------------------------Apostar----------------------------------//
@@ -116,4 +127,41 @@ function Apostar(newApostar) {
         $('<div class="alert alert-danger"> <strong>Oh!</strong> Error al agregar el partido</div>').appendTo($(""));
     });
 
+}
+
+function getApuestaByID(id) {
+    var url = API_BASE_URL + '/apuesta/' + id;
+    var user = JSON.parse(sessionStorage["auth-token"]);
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        headers: {
+        "X-Auth-Token":user.token,
+        },
+        crossDomain: true,
+        dataType: 'json',
+    statusCode:
+        {
+        404: function()
+            {
+            var html = '<div class="alert alert-danger" style="text-align:center"><h5>Apuesta no activa</h5></div>';
+            $("#idpaneltotal").html(html);
+            }
+        }
+        
+    }).done(function(data, status, jqxhr) {
+        var a = data.estado; 
+        if (a.localeCompare("activa") == 0)
+        {
+            apuestaActivada = true;
+        }
+        else
+        {
+            apuestaActivada = false;
+        }
+        getPartidoId(id);
+    }).fail(function() {
+        $("#form-apuestaadmin").text("Error al obtener listas");
+    });   
 }
