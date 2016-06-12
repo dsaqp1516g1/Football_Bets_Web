@@ -67,11 +67,23 @@ function crearApuesta(newApuesta) {
     	},
     	contentType: 'application/x-www-form-urlencoded',
 		data : newApuesta,
+        statusCode:
+        {
+        409: function()
+            {   $('#erroresagregar').text(' ');
+                $('<div class="alert alert-danger">El partido ya tiene una apuesta</div>').appendTo($("#erroresagregar"));
+            },
+        500: function()
+            {   $('#erroresagregar').text(' ');
+                $('<div class="alert alert-danger">Error en los campos</div>').appendTo($("#erroresagregar"));
+            }
+        }
 	}).done(function(partido, status, jqxhr) {
-        $('<div class="alert alert-success"> <strong>Oh!</strong> Partido agregado</div>').appendTo($(""));
+        $('#erroresagregar').text(' ');
+        $('<div class="alert alert-success">Apuesta agregada</div>').appendTo($("#erroresagregar"));
         getApuestas();
   	}).fail(function() {
-		$('<div class="alert alert-danger"> <strong>Oh!</strong> Error al agregar el partido</div>').appendTo($(""));
+		
 	});
 
 }
@@ -99,11 +111,23 @@ function finalizarApuesta(endApuesta) {
     	},
     	contentType: 'application/x-www-form-urlencoded',
 		data : endApuesta,
+        statusCode:
+        {
+        405: function()
+            {   $('#erroresfinalizar').text(' ');
+                $('<div class="alert alert-danger">Error Partido no finalizado</div>').appendTo($("#erroresfinalizar"));
+            },
+        500: function()
+            {   $('#erroresfinalizar').text(' ');
+                $('<div class="alert alert-danger">Error en los campos</div>').appendTo($("#erroresfinalizar"));
+            }
+        }
 	}).done(function(partido, status, jqxhr) {
-        $('<div class="alert alert-success"> <strong>Oh!</strong> Partido agregado</div>').appendTo($(""));
+        $('#erroresfinalizar').text(' ');
+        $('<div class="alert alert-success">Apuesta finalizada</div>').appendTo($("#erroresfinalizar"));
         getApuestas();
   	}).fail(function() {
-		$('<div class="alert alert-danger"> <strong>Oh!</strong> Error al agregar el partido</div>').appendTo($(""));
+		
 	});
 
 }
@@ -128,11 +152,22 @@ function eliminarApuesta(deleteApuesta) {
 		headers: {
         "X-Auth-Token":user.token,
     	},
+ statusCode:
+        {
+        405: function()
+            {   $('#erroreseliminar').text(' ');
+                $('<div class="alert alert-danger">Error en los campos</div>').appendTo($("#erroreseliminar"));
+            },
+        500: function()
+            {   $('#erroreseliminar').text(' ');
+                $('<div class="alert alert-danger">Error en los campos</div>').appendTo($("#erroreseliminar"));
+            }
+        }
 	}).done(function(partido, status, jqxhr) {
-        $('<div class="alert alert-success"> <strong>Oh!</strong> Partido agregado</div>').appendTo($(""));
+        $('#erroreseliminar').text(' ');
+        $('<div class="alert alert-success">Apuesta eliminada</div>').appendTo($("#erroreseliminar"));
         getApuestas();
   	}).fail(function() {
-		$('<div class="alert alert-danger"> <strong>Oh!</strong> Error al agregar el partido</div>').appendTo($(""));
 	});
 
 }
@@ -154,6 +189,7 @@ function getPartidos() {
         html = html.concat('<thead>');
         html = html.concat('<tbody>');
         html = html.concat('<tr>');
+        html = html.concat('<th>ID</th>');
         html = html.concat('<th>Local</th>');
         html = html.concat('<th>Visitante</th>');
         html = html.concat('<th>Jornada</th>');
@@ -169,6 +205,7 @@ function getPartidos() {
                     var partido = v;
                         html = html.concat('<tbody>');
                         html = html.concat('<tr>');
+                        html = html.concat('<td>' + partido.id+ '</td>');
                         html = html.concat('<td>' + getResolucionNombreEquipo(partido.local) + '</td>');
                         html = html.concat('<td>' + getResolucionNombreEquipo(partido.visitante) + '</td>');
                         html = html.concat('<td>' + partido.jornada+ '</td>');
@@ -210,6 +247,7 @@ function getApuestas() {
         html = html.concat('<thead>');
         html = html.concat('<tbody>');
         html = html.concat('<tr>');
+        html = html.concat('<th>ID</th>');
         html = html.concat('<th>Cuota 1</th>');
         html = html.concat('<th>Cuota X</th>');
         html = html.concat('<th>Cuota 2</th>');
@@ -223,6 +261,7 @@ function getApuestas() {
 					var apuesta = v;
         				html = html.concat('<tbody>');
         				html = html.concat('<tr>');
+                        html = html.concat('<td>' + apuesta.id + '</td>');
         				html = html.concat('<td>' + apuesta.cuota1 + '</td>');
                         html = html.concat('<td>' + apuesta.cuotax + '</td>');
                         html = html.concat('<td>' + apuesta.cuota2 + '</td>');
