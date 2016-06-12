@@ -55,154 +55,84 @@
                     <li><a href="apuestas.html"><i class="glyphicon glyphicon-euro"></i>Apuestas</a></li>
                     <li class="current"><a href="equipos.html"><i class="glyphicon glyphicon-user"></i>Equipos</a></li>
                     <li><a href="index.html"><i class="glyphicon glyphicon-home"></i>FootballBets</a></li>
-             </div>
-		  </div>
-		  <div class="col-md-10">
-		  	<div class="row">
-				<div class="col-md-4">
-						  			<div class="content-box-large">
-						  				<div class="panel-heading">
-											<div class="panel-title">Agregar Partido</div>						
-											<div class="panel-options">
-												<a href="perfil.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
-											</div>
-										</div>
-						  				<div class="panel-body" id="agregarinfo">
-											<form role="form">
-											<div class="form-group">
-				  							<label for="usr">Local:</label>
-				  							<input type="text" class="form-control" id="local">
-											</div>
-											<div class="form-group">
-				  							<label for="usr">Visitante:</label>
-				  							<input type="text" class="form-control" id="visitante">
-											</div>
-											<div class="form-group">
-											<label for="usr">Jornada:</label>
-				  							<input type="text" class="form-control" id="jornada">
-											</div>
-											<div class="form-group">
-											<label for="usr">Fecha:</label>
-				  							<input type="text" class="form-control" id="fecha" placeholder="YYY-MM-DD">
-											</div>
-											<div class="form-group">
-											<label for="usr">Goles del local:</label>
-				  							<input type="text" class="form-control" id="goleslocal">
-											</div>
-											<div class="form-group">
-											<label for="usr">Goles del visitante:</label>
-				  							<input type="text" class="form-control" id="golesvisitante">
-											</div>
-											<div class="form-group">
-											<label for="estado">Estado:</label>
-											<select class="form-control" id="estado">
-											<option>programado</option>
-											<option>finalizado</option>
-											</select>
-											</div>
-											<div class="form-group">
-											<button type="submit" class="btn btn-success btn-block" id="agregarpartido">Agregar</button>
-											</div>
-											</form>
-						  				</div>
-						  			</div>
-						  		</div>
-
-		  		<div class="col-md-4">
-		  			<div class="content-box-large">
-		  				<div class="panel-heading">
-							<div class="panel-title">Modificar Partido</div>						
-							<div class="panel-options">
-								<a href="perfil.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
-							</div>
-						</div>
-		  				<div class="panel-body" id="modificarinfo">
-							<form role="form">
-							<div class="form-group">
-  							<label for="usr">ID Partido:</label>
-  							<input type="text" class="form-control" id="idpartido">
-							</div>
-							<div class="form-group">
-  							<label for="usr">Local:</label>
-  							<input type="text" class="form-control" id="modlocal">
-							</div>
-							<div class="form-group">
-  							<label for="usr">Visitante:</label>
-  							<input type="text" class="form-control" id="modvisitante">
-							</div>
-							<div class="form-group">
-							<label for="usr">Jornada:</label>
-  							<input type="text" class="form-control" id="modjornada">
-							</div>
-							<div class="form-group">
-							<label for="usr">Fecha:</label>
-  							<input type="text" class="form-control" id="modfecha" placeholder="YYY-MM-DD">
-							</div>
-							<div class="form-group">
-							<label for="usr">Goles del local:</label>
-  							<input type="text" class="form-control" id="modgoleslocal">
-							</div>
-							<div class="form-group">
-							<label for="usr">Goles del visitante:</label>
-  							<input type="text" class="form-control" id="modgolesvisitante">
-							</div>
-							<div class="form-group">
-							<label for="estado">Estado:</label>
-							<select class="form-control" id="modestado">
-							<option>programado</option>
-							<option>finalizado</option>
-							</select>
-							</div>
-							<div class="form-group">
-							<button type="submit" class="btn btn-warning btn-block" id="modificarpartido">Modificar</button>
-							</div>
-							</form>
-		  				</div>
-		  			</div>
+             	</div>
 		  		</div>
-
-		  		<div class="col-md-4">
-		  			<div class="content-box-large">
+		  	<div class="col-md-10">
+		  		<div class="row">
+			  		<div class="col-md-3">
+			  			<div class="row">
+							<div class="content-box-large">
 		  				<div class="panel-heading">
-							<div class="panel-title">Eliminar Partido:</div>						
+							<div class="panel-title">Obtener Equipos:</div>						
 							<div class="panel-options">
-								<a href="perfil.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
 							</div>
 						</div>
 		  				<div class="panel-body" id="eliminarinfo">
 		  				<form role="form">
 							<div class="form-group">
-  							<label for="usr">ID Partido:</label>
-  							<input type="text" class="form-control" id="ideliminar">
-							</div>	
+							<label for="sel1">ID LIGA:</label>
+							<select class="form-control" id="liga">
+							<option>BBVA</option>
+							<option>Bundesliga</option>
+							<option>Ligue 1</option>
+							<option>Premiere League</option>
+							<option>Serie A</option>
+							</select>
+							</div>
 							<div class="form-group">
-							<button type="submit" class="btn btn-danger btn-block" id="eliminarpartido">Eliminar</button>
+							<button type="submit" class="btn btn-primary btn-block" id="obenerequipos">Mostrar Equipos</button>
 							</div>						
 		  				</div>
 		  			</div>
-		  		</div>
-		  </div>
- 		<!--_____________________________tabla ver partidos________________-->
- 			<div class="col-md-12">
-		  	<div class="row">
-		  		<div class="col-md-12">
-		  			<div class="content-box-large">
+			  			</div>
+
+			  		<div class="row">
+			  			<div class="content-box-large">
 		  				<div class="panel-heading">
-							<div class="panel-title">Partidos</div>						
+							<div class="panel-title">Guardar equipos:</div>						
 							<div class="panel-options">
-								<a href="admin.html" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
 							</div>
 						</div>
-		  				<div class="panel-body" id="listapartidos">
-		  				<fom class="form-partidosadmin" id="form-partidosadmin"></fom>
+		  				<div class="panel-body" id="agregarequipo">
+		  				<form role="form">
+		  					<div class="form-group">
+  							<label for="usr">Nombre:</label>
+  							<input type="text" class="form-control" id="equiponombre">
+							</div>
+							<div class="form-group">
+  							<label for="usr">Nomenclatura:</label>
+  							<input type="text" class="form-control" id="equiponomenclatura">
+							</div>
+							<div class="form-group">
+  							<label for="usr">Valor:</label>
+  							<input type="text" class="form-control" id="equipovalor">
+							</div>
+							<div class="form-group">
+							<button type="submit" class="btn btn-primary btn-block" id="guardar">Guardar Equipo</button>
+							</div>														
 		  				</div>
 		  			</div>
+			  		</div>
+			  		</div>
+			  		<div class="col-md-1">
+			  		</div>
+			  		<div class="col-md-8">
+			  		<div class="row">
+			  			<div class="content-box-large">
+		  				<div class="panel-heading">
+							<div class="panel-title">Mostrar Equipos</div>						
+							<div class="panel-options">
+							</div>
+						</div>
+		  				<div class="panel-body" id="listaequipos">
+		  				<fom class="form-equipos" id="form-equipos"></fom>
+		  				</div>
+		  			</div>
+			  		</div>
+			  		</div>
 		  		</div>
-		  </div>
-		</div>
-
-		</div>
-    </div>
+		  	</div>
+    	</div>
 
     <footer>
          <div class="container">
