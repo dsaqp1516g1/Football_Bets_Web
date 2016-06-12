@@ -1,7 +1,39 @@
 //-------------Get Partidos-----------------------------------------------//
 $(document).ready(function(){
-    getPartidos();
+    getListaPartidos();
 });
+//----------------------------Carga-el-listado-de-equipos---------------------------//
+function getListaPartidos() {
+    var url = API_BASE_URL + '/equipo/'
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'json',
+        
+    }).done(function(data, status, jqxhr) {
+        listadoEquipos = data.equipos;
+        getPartidos();
+    }).fail(function() {
+        $("#form-partidos").text("Error al obtener listas");
+    });
+   
+}
+//----------------------------Resolución---de----Nombres---------------------------//
+function getResolucionNombreEquipo(id)
+{
+    var nombre = null;
+    $.each(listadoEquipos, function(i, equipo) 
+    {
+        if (id.localeCompare(equipo.id) == 0)
+        {
+            nombre = equipo.nombre;
+        }
+    });
+
+    return nombre;
+}
 
 
 function getPartidos() {
@@ -14,37 +46,43 @@ function getPartidos() {
         dataType: 'json',
         
     }).done(function(data, status, jqxhr) {
-    	var partidos = data.partidos;
-		var html = '';
+        var partidos = data.partidos;
+        var html = '';
         html = html.concat('<table class="table table-hover">');
         html = html.concat('<thead>');
         html = html.concat('<tbody>');
         html = html.concat('<tr>');
-        html = html.concat('<th>ID</th>');
         html = html.concat('<th>Local</th>');
         html = html.concat('<th>Visitante</th>');
-        html = html.concat('<th>Jornada</th>');;
+        html = html.concat('<th>Fecha</th>');
+        html = html.concat('<th>Estado</th>');
+        html = html.concat('<th>G.Local</th>');
+        html = html.concat('<th>G.Visitante</th>');
+        html = html.concat('<th>Partido</th>');
         html = html.concat('</tr>');
         html = html.concat('</thead>');
 
-			$.each(partidos, function(i, v) {
-					var partido = v;
-        				html = html.concat('<tbody>');
-        				html = html.concat('<tr>');
-        				html = html.concat('<td>' + partido.id + '</td>');
-        				html = html.concat('<td>' + partido.local + '</td>');
-        				html = html.concat('<td>' + partido.visitante + '</td>');
-        				html = html.concat('<td>' + partido.jornada+ '</td>');
+            $.each(partidos, function(i, v) {
+                    var partido = v;
+                        html = html.concat('<tbody>');
+                        html = html.concat('<tr>');
+                        html = html.concat('<td>' + getResolucionNombreEquipo(partido.local) + '</td>');
+                        html = html.concat('<td>' + getResolucionNombreEquipo(partido.visitante) + '</td>');
+                        html = html.concat('<td>' + partido.fecha+ '</td>');
+                        html = html.concat('<td>' + partido.estado+ '</td>');
+                        html = html.concat('<td>' + partido.goleslocal+ '</td>');
+                        html = html.concat('<td>' + partido.golesvisitante+ '</td>');
+                        var id = partido.id;
+                        html = html.concat('<td>' +'<button  onclick="agregarinfo(\''+partido.local+'\',\''+partido.visitante+'\')" class="btn btn-sm btn-primary btn-block" type="submit">Usar</button>'+'</td>');
                         html = html.concat('</tr>');
-        				html = html.concat('</tbody>');
-        				$("#form-partidosadmin").html(html);
-				});
+                        html = html.concat('</tbody>');
+                        $("#form-partidosadmin").html(html);
+                });
         html = html.concat('</table>');
-				
-	}).fail(function() {
-		$("#form-partidosadmin").text("Error al obtener listas");
-	});
-   
+                
+    }).fail(function() {
+        $("#form-partidosadmin").text("Error al obtener listas");
+    });  
 }
 //------------------------agregar-partido------------------------------------//
 $("#agregarpartido").click(function(e) {
@@ -53,20 +91,17 @@ $("#agregarpartido").click(function(e) {
     var newPartido = new Object();
 	newPartido.local = $("#local").val();
 	newPartido.visitante = $("#visitante").val();
- 	newPartido.jornada = $("#jornada").val();
+ 	newPartido.jornada = 1;
  	newPartido.fecha = $("#fecha").val();
-	newPartido.goleslocal = $("#goleslocal").val();
-	newPartido.golesvisitante = $("#golesvisitante").val();
-	newPartido.estado = $("#estado").val();
+	newPartido.goleslocal = 0;
+	newPartido.golesvisitante = 0;
+	newPartido.estado = 'programado';
 	crearPartido(newPartido);
 });
 
 
 function crearPartido(newPartido) {
 	var user = JSON.parse(sessionStorage["auth-token"]);
-	console.log(user);
-    console.log(user.userid);
-    console.log(user.token)
     var url = API_BASE_URL + '/partido';
 
 	$.ajax({
@@ -155,4 +190,11 @@ function eliminarPartido(deletePartido){
                 $('<div class="alert alert-success"> <strong>Oh!</strong>Error partido no eliminado</div>').appendTo($("#eliminarinfo"));
             }
         );
+}
+
+//----------------------------------------------------Agregar a cuadros-----------------------------------//
+function agregarinfo(local,visitante){
+
+    $("#local").val(local);
+    $("#visitante").val(visitante);
 }
